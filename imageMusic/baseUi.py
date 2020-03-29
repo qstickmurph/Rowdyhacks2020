@@ -53,4 +53,4 @@ def gui(title, message):
 
     mainloop()
 
-gui("GUI.pi", "Import an image file.")
+#gui("GUI.pi", "Import an image file.")

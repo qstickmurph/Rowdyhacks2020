@@ -1,10 +1,10 @@
-class KernalConvolution(object):
+class KernelConvolution(object):
 
     height = 0 #how many pixels above and below the center the filter references
     width = 0 #how many pixels left and right of the center the filter references
     weights = [] #the list of weights for the relative positions of the pixels to the center
 
-    def init(self, height, width, weights):
+    def __init__(self, height, width, weights):
         self.height = height
         self.width = width
         self.weights = weights
@@ -57,11 +57,11 @@ meanBlur7x7 = KernelConvolution(3, 3,
             [1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1]  ])
 
-gaussianBlur3x3 = KernelConvolutions(1, 1,
+gaussianBlur3x3 = KernelConvolution(1, 1,
         [   [1, 2, 1],
             [2, 4, 1],
             [1, 2, 1]  ])
-gaussianBlur5x5 = KernelConvolutions(2, 2,
+gaussianBlur5x5 = KernelConvolution(2, 2,
         [   [1, 4,  7,  4,  1],
             [4, 16, 26, 16, 4],
             [7, 26, 41, 26, 7],
