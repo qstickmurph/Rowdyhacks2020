@@ -1,4 +1,6 @@
-class Image(object):
+from PIL import Image
+
+class OurImage(object):
 
     rawImage = None
     height = 0
@@ -22,3 +24,6 @@ class Image(object):
 
     def convert_to_gs(self, image):
         pass
+
+
+
