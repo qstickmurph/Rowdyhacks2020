@@ -2,25 +2,35 @@ from pydub import AudioSegment
 
 class Song:
 	def __init__(self):
-		self.key = 1
+		self.key = 2
 		self.octave = 1
+		self.tempo = 4
 		self.instrumentation = None
 		
 	def tempo(self, luminosity):
-		pass
+		val = 768 / 4
+		if luminosity < val:
+			self.tempo = 1
+		elif luminosity < val * 2:
+			self.tempo = 2
+		elif luminosity < val * 3:
+			self.tempo = 3
+		else:
+			self.tempo = 4
 		
 	def key(self, value ):
 		keys = 12
 		rgb_total_slice = 768/keys
 		for i in range(keys):
 			if value < rgb_total_slice * i:
+				self.key = i
 				return i
 		
-		
 	def octave(self, value):
-		value_max = 1000  / 5 #1000 is a placeholder
+		value_max = value / 5 #5 is a placeholder
 		for i in range(5):
 			if value < value_max * i:
+				self.octave = i
 				return i
 	
 	def instrumentation(self, value):
@@ -62,13 +72,9 @@ class Song:
 			note = note_list[6]
 		else: #for now this else conditions is tasked with building chords
 		
-			note_1 = "ff.C4.wav"
-			note_2 = "ff.E4.wav"
-			note_3 = "ff.G4.wav"
-		
-			audio_name_1 = "sounds/" + str(octave) + "/" + note_1
-			audio_name_2 = "sounds/" + str(octave) + "/" + note_2
-			audio_name_3 = "sounds/" + str(octave) + "/" + note_3
+			audio_name_1 = "sounds/" + str(octave) + "/" + note_list[0]
+			audio_name_2 = "sounds/" + str(octave) + "/" + note_list[1]
+			audio_name_3 = "sounds/" + str(octave) + "/" + note_list[2]
 			
 			audio_1 = AudioSegment.from_file(audio_name_1, format="wav")
 			audio_2 = AudioSegment.from_file(audio_name_2, format="wav")
@@ -96,8 +102,33 @@ class Song:
 		octave = 1
 		sound = AudioSegment.empty() #initialize empty audio segment
 		for i in range(len(pixel_list)):
-			sound = sound + Song.note(value=pixel_list[i], key=self.key, octave=1)
+			sound_temp = Song.note(value=pixel_list[i], key=self.key, octave=self.octave)
+			sound_temp = self.adjust_for_tempo(sound_temp)
+			sound = sound + sound_temp
 		self.song = sound
+		
+	def adjust_for_tempo(self, audio):
+		truncator = AudioSegment.empty()
+		if self.tempo == 1:
+			truncator = AudioSegment.silent(duration=1000)
+			truncator.fade_out(duration=600)
+		elif self.tempo ==  2:
+			truncator = AudioSegment.silent(duration=2000)
+			truncator.fade_out(duration=1500)
+		else:
+			truncator = AudioSegment.silent(duration=3000)
+			truncator.fade_out(duration=2500)
+		
+		return truncator.overlay(audio)
 	
 	def download_song(self, name):
 		self.song.export(name, format="wav", bitrate="192k")
+		
+	def set_key(self, key):
+		self.key = key
+		
+	def set_tempo(self, tempo):
+		self.tempo = tempo
+		
+	def set_octabe(self, oct):
+		self.octave = oct
