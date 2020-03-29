@@ -1,4 +1,4 @@
-class KernalConvolutions(object):
+class KernalConvolution(object):
 
     height = 0 #how many pixels above and below the center the filter references
     width = 0 #how many pixels left and right of the center the filter references
@@ -37,3 +37,58 @@ class KernalConvolutions(object):
                 return False
         return True
 
+
+meanBlur3x3 = KernelConvolution(1, 1,
+        [   [1, 1, 1],
+            [1, 1, 1],
+            [1, 1, 1]])
+meanBlur5x5 = KernelConvolution(2, 2,
+        [   [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1]  ])
+meanBlur7x7 = KernelConvolution(3, 3,
+        [   [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1]  ])
+
+gaussianBlur3x3 = KernelConvolutions(1, 1,
+        [   [1, 2, 1],
+            [2, 4, 1],
+            [1, 2, 1]  ])
+gaussianBlur5x5 = KernelConvolutions(2, 2,
+        [   [1, 4,  7,  4,  1],
+            [4, 16, 26, 16, 4],
+            [7, 26, 41, 26, 7],
+            [4, 16, 26, 16, 4],
+            [1, 4,  7,  4,  1]  ])
+
+#sobelOperatorX3x3
+#sobelOperatorX5x5
+#sobelOperatorY5x5
+#sobelOperatorY5x5
+
+#laplacianFilter3x3
+#laplacianFilter5x5
+#laplacianFilter7x7
+
+#motionBlur3x3
+#motionBlur5x5
+#motionBlur7x7
+
+#sharpenFilter3x3
+#sharpenFilter5x5
+#sharpenFilter7x7
+
+#embossFilter3x3
+#embossFilter5x5
+#embossFilter7x7
+
+#highContrastFilter3x3
+#highContrastFilter5x5
+#highContrastFilter7x7
