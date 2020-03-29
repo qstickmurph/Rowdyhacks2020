@@ -10,15 +10,18 @@ class KernalConvolutions(object):
         self.__weights = weights
 
     def apply_filter(self, image):
-        
-        finalArray = [[0 for j in range(0, image[i])] for i in range(0, len(image))]
+        print(f"Running apply_filter {len(image)}")
+        finalArray = [[0 for j in range(0, len(image[i]))] for i in range(0, len(image))]
         for i in range(0, len(image)):
             for j in range(0, len(image[i])):
                 weightedSum = 0
-                for x in range(max(0, i - self.__width), min(len(image) - 1), i + self.__width):
-                    for y in range(max(0, j - self.__height), min(len(image[i] - 1, j + self.__height))):
-                        weightedSum += image[y][x]*weights[y - max(0, j - self.__height)][x - max(0, i - self.__width)]        
+                print(f"\tFinding weighted average for ({j},{i})")
+                for y in range(max(0, j - self.__height), min(len(image[i]) - 1, j + self.__height) + 1):
+                    for x in range(max(0, i - self.__width), min(len(image) - 1, i + self.__width) + 1):
+                        print(f"\t\tLooking at ({x},{y}), adding {image[y][x]*self.__weights[y - max(0, j - self.__height)][x - max(0, i - self.__width)]}")
+                        weightedSum += image[y][x]*self.__weights[y - max(0, j - self.__height)][x - max(0, i - self.__width)]        
                 finalArray[j][i] = weightedSum
+                print(f"\t\tWeighted sum = {weightedSum}")
         return finalArray
 
     def change_filter(self, weights):
@@ -31,3 +34,21 @@ class KernalConvolutions(object):
             if len(line) != self.__width*2 + 1:
                 return False
         return True
+
+
+
+
+
+
+meanBlur = KernalConvolutions(1, 1, 
+        [[1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]])
+
+print(meanBlur.apply_filter(
+        [[1, 2, 3, 4, 5],
+        [2, 3, 4, 5, 6],
+        [3, 4, 5, 6, 7],
+        [4, 5, 6, 7, 8],
+        [5, 6, 7, 8, 9]]))
+
