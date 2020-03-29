@@ -20,10 +20,24 @@ class OurImage(object):
         return self.gsList
 
     def convert_to_rgb(self, image):
-        pass
+        rawRgb = self.rawImage.convert("rgb")
+        fullList = []
+        for i in range(0, rawImage.size[1]):
+            subList = []
+            for j in range(0, rawImage.size[0]):
+                sublist.append(rawRgb.getpixel(i,j))
+            fullList.append(subList)
+        self.rgbList = fullList
 
     def convert_to_gs(self, image):
-        pass
+        rawGs = self.rawImage.convert("L")
+        fullList = []
+        for i in range(0, rawImage.size[1]):
+            subList = []
+            for j in range(0, rawImage.size[0]):
+                sublist.append(rawRgb.getpixel(i,j))
+            fullList.append(subList)
+        self.gsList = fullList
 
 
 
