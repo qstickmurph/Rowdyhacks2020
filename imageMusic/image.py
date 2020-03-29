@@ -41,6 +41,3 @@ class OurImage(object):
                 subList.append(rawGs.getpixel((j,i)))
             fullList.append(subList)
         self.gsList = fullList
-
-
-my_image = OurImage(Image.open("dog.jpg"))
