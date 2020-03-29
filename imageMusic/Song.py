@@ -40,28 +40,26 @@ class Song:
 			new_sound = audio_3.overlay(new_sound)
 		return new_sound
 	
-	#TODO: Algorithm for choosing proper key
-	#TODO: Eliminate redundency
 	@staticmethod
 	def note( value, key=1, octave=1):
 		#select audio file based on value and key
-		#placeholder way to select nodes ( currently independent of key )
+		note_list = Song.get_key_notes(key)
 		tk = 9
 		note = ""
 		if value % tk == 0:
-			note = "ff.C4.wav"
+			note = note_list[0]
 		elif value % tk == 1:
-			note = "ff.B4.wav"
+			note = note_list[1]
 		elif value % tk == 2:
-			note = "ff.A4.wav"
+			note = note_list[2]
 		elif value % tk == 3:
-			note = "ff.E4.wav"
+			note = note_list[3]
 		elif value % tk == 4:
-			note = "ff.F4.wav"
+			note = note_list[4]
 		elif value % tk == 5:
-			note = "ff.G4.wav"
+			note = note_list[5]
 		elif value % tk == 6:
-			note = "ff.D4.wav"
+			note = note_list[6]
 		else: #for now this else conditions is tasked with building chords
 		
 			note_1 = "ff.C4.wav"
@@ -79,7 +77,20 @@ class Song:
 			return Song.construct_chord(audio_1, audio_2, audio_3)
 		audio_name = "sounds/" + str(octave) + "/" + note
 		return AudioSegment.from_file(audio_name, format="wav")
-		
+	
+	def get_key_notes(key):
+		if(key == 1):#C major
+			return ["ff.C4.wav", "ff.B4.wav", "ff.A4.wav", "ff.E4.wav", "ff.F4.wav", "ff.G4.wav", "ff.D4.wav"]
+		elif(key == 2):#c minor
+			return ["ff.C4.wav", "ff.Bb4.wav", "ff.Ab4.wav", "ff.Eb4.wav", "ff.F4.wav", "ff.G4.wav", "ff.D4.wav"]
+		elif(key == 3):#D major
+			return ["ff.Db4.wav", "ff.Bb4.wav", "ff.Ab4.wav", "ff.Eb4.wav", "ff.F4.wav", "ff.Gb4.wav", "ff.D4.wav"]
+		elif(key == 4):#D minor
+			return ["ff.C4.wav", "ff.Bb4.wav", "ff.A4.wav", "ff.E4.wav", "ff.F4.wav", "ff.G4.wav", "ff.D4.wav"]
+		elif(key == 5):#E major
+			return ["ff.Db4.wav", "ff.B4.wav", "ff.A4.wav", "ff.E4.wav", "ff.Gb4.wav", "ff.G4.wav", "ff.Eb4.wav"]
+		elif(key == 6):# E minor (same notes as d minor)
+			return ["ff.C4.wav", "ff.Bb4.wav", "ff.A4.wav", "ff.E4.wav", "ff.Gb.wav", "ff.G4.wav", "ff.D4.wav"]
 	
 	def concatenate_melody(self, pixel_list):
 		octave = 1
