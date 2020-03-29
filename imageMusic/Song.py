@@ -27,20 +27,25 @@ class Song:
 		pass
 	
 	#@staticmethod
-	def note(self,value, key, octave=1):
+	def note( value, key=1, octave=1):
 		#select audio file based on value and key
-		#placeholder way to select nodes ( currently independent of keys )
+		#placeholder way to select nodes ( currently independent of key )
 		note = ""
-		if True:
+		print(str(value))
+		if value % 7 == 0:
 			note = "ff.C4.wav"
-		elif value % 7 == 0:
-			note = "C"
 		elif value % 7 == 1:
-			note = "D"
+			note = "ff.B4.wav"
 		elif value % 7 == 2:
-			note = "E"
+			note = "ff.A4.wav"
+		elif value % 7 == 3:
+			note = "ff.E4.wav"
+		elif value % 7 == 4:
+			note = "ff.F4.wav"
+		elif value % 7 == 5:
+			note = "ff.G4.wav"
 		else:
-			note = "F"
+			note = "ff.D4.wav"
 		#
 		audio_name = "sounds/"
 		audio_name = audio_name + str(octave) + "/" + note
@@ -52,7 +57,8 @@ class Song:
 		octave = 1
 		sound = AudioSegment.empty() #initialize empty audio segment
 		for i in range(len(pixel_list)):
-			sound = sound + Song.note(pixel_list[i], self.key, 1)
+			print(pixel_list[i])
+			sound = sound + Song.note(value=pixel_list[i], key=self.key, octave=1)
 		self.song = sound
 	
 	def download_song(self, name):
