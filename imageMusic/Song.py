@@ -29,9 +29,11 @@ class Song:
 	#@staticmethod
 	def note(self,value, key, octave=1):
 		#select audio file based on value and key
-		#placeholder way to select nodes ( independent of keys )
+		#placeholder way to select nodes ( currently independent of keys )
 		note = ""
-		if value % 7 == 0:
+		if True:
+			note = "ff.C4.wav"
+		elif value % 7 == 0:
 			note = "C"
 		elif value % 7 == 1:
 			note = "D"
@@ -41,10 +43,9 @@ class Song:
 			note = "F"
 		#
 		audio_name = "sounds/"
-		audio_name = audio_name + str(octave) + "/" + note + ".wav"
+		audio_name = audio_name + str(octave) + "/" + note
 		file = open(audio_name, "r")
-		if file:
-			print("this shouldn't worka")
+		
 		return AudioSegment.from_file(audio_name, format="wav")
 	
 	def concatenate_melody(self, pixel_list):
