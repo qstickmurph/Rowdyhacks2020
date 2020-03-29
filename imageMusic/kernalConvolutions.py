@@ -35,20 +35,3 @@ class KernalConvolutions(object):
                 return False
         return True
 
-
-
-
-
-
-meanBlur = KernalConvolutions(1, 1, 
-        [[1, 1, 1],
-        [1, 1, 1],
-        [1, 1, 1]])
-
-print(meanBlur.apply_filter(
-        [[1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-        [3, 4, 5, 6, 7],
-        [4, 5, 6, 7, 8],
-        [5, 6, 7, 8, 9]]))
-
